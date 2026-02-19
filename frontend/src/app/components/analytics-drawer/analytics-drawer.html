@@ -1,0 +1,68 @@
+<div class="analytics-drawer" [class.open]="isOpen">
+    <div class="drawer-header">
+        <h3>📊 Session Analytics</h3>
+        <button (click)="closeDrawer()" class="close-btn">×</button>
+    </div>
+
+    <div class="drawer-content">
+        <!-- Loading State -->
+        <div *ngIf="isLoading" class="loading-state">
+            Loading session history...
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="!isLoading && sessionHistory.length === 0" class="empty-state">
+            <p>No training sessions yet.</p>
+            <p>Start a session to see your analytics!</p>
+        </div>
+
+        <!-- Analytics Content -->
+        <div *ngIf="!isLoading && sessionHistory.length > 0">
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="card best">
+                    <div class="label">🏆 Best</div>
+                    <div class="value">{{ bestSession?.accuracy_percentage }}%</div>
+                    <div class="subtitle">Session #{{ bestSession?.session_id }}</div>
+                </div>
+                <div class="card latest">
+                    <div class="label">📅 Latest</div>
+                    <div class="value">{{ latestSession?.accuracy_percentage }}%</div>
+                    <div class="subtitle">Session #{{ latestSession?.session_id }}</div>
+                </div>
+                <div class="card average">
+                    <div class="label">📊 Average</div>
+                    <div class="value">{{ averageAccuracy }}%</div>
+                    <div class="subtitle">{{ sessionHistory.length }} sessions</div>
+                </div>
+            </div>
+
+            <!-- Session List -->
+            <div class="session-list">
+                <h4>Session History</h4>
+                <div *ngFor="let session of sessionHistory" class="session-item">
+                    <div class="session-header">
+                        <span class="session-id">Session #{{ session.session_id }}</span>
+                        <span class="accuracy" [class.excellent]="session.accuracy_percentage >= 80"
+                            [class.good]="session.accuracy_percentage >= 60 && session.accuracy_percentage < 80"
+                            [class.fair]="session.accuracy_percentage >= 40 && session.accuracy_percentage < 60"
+                            [class.poor]="session.accuracy_percentage < 40">
+                            {{ session.accuracy_percentage }}%
+                        </span>
+                    </div>
+                    <div class="session-details">
+                        <div class="detail">📹 {{ session.video_name }}</div>
+                        <div class="detail">🕐 {{ formatDate(session.created_at) }}</div>
+                        <div class="detail">📝 {{ session.total_events }} events</div>
+                    </div>
+                    <div class="session-breakdown">
+                        <span class="stat perfect" title="Perfect">✓ {{ session.perfect_count }}</span>
+                        <span class="stat good" title="Good">✓ {{ session.good_count }}</span>
+                        <span class="stat miss" title="Missed">✗ {{ session.missed_count }}</span>
+                        <span class="stat wrong" title="Wrong">✗ {{ session.wrong_count }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

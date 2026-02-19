@@ -1,0 +1,17 @@
+<div class="control-panel">
+    <h3>Log Events</h3>
+    <div class="buttons-grid">
+        <button *ngFor="let btn of buttons" (click)="logEvent(btn.label)" class="event-btn card-style" [ngClass]="{
+                    'btn-success': getButtonState(btn.label) === 'success',
+                    'btn-error': getButtonState(btn.label) === 'error'
+                }" [disabled]="!isEnabled">
+            <div class="card-content">
+                <span class="label">{{ btn.label }}</span>
+                <span class="key-hint">[{{ btn.key }}]</span>
+                <span class="feedback-icon" *ngIf="getButtonState(btn.label) !== 'idle'">
+                    {{ getButtonState(btn.label) === 'success' ? '✓' : '✗' }}
+                </span>
+            </div>
+        </button>
+    </div>
+</div>

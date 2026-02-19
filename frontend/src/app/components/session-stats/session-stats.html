@@ -1,0 +1,29 @@
+<div class="stats-container" *ngIf="sessionActive">
+    <div class="stats-header">
+        <h4>📊 Session Stats</h4>
+        <span class="accuracy-badge" [ngClass]="getAccuracyClass()">{{ accuracyPercentage }}%</span>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-item perfect" title="Perfect: Within 1 second of the event">
+            <span class="count">{{ perfectCount }}</span>
+            <span class="label">Perfect</span>
+        </div>
+        <div class="stat-item acceptable" title="Good: Within 1-2 seconds of the event">
+            <span class="count">{{ acceptableCount }}</span>
+            <span class="label">Good</span>
+        </div>
+        <div class="stat-item miss" title="Missed: 2-5 seconds away from the event">
+            <span class="count">{{ missCount }}</span>
+            <span class="label">Missed</span>
+        </div>
+        <div class="stat-item false-positive" title="Wrong: More than 5 seconds away from the event">
+            <span class="count">{{ falsePositiveCount }}</span>
+            <span class="label">Wrong</span>
+        </div>
+    </div>
+
+    <div class="total-events">
+        {{ totalEvents }} events logged
+    </div>
+</div>

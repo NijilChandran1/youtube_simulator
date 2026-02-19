@@ -1,0 +1,36 @@
+<div class="feedback-container">
+    <h3>Feedback Log</h3>
+    <div class="feedback-list">
+        <div *ngFor="let item of sortedFeedbackList" class="feedback-item">
+            <div class="header">
+                <span class="badge" [ngClass]="getAccuracyClass(item.accuracy_level)">
+                    {{ getAccuracyLabel(item.accuracy_level) }}
+                </span>
+                <span class="diff" *ngIf="item.time_difference_ms !== 0">
+                    {{ getTimeDifferenceText(item.time_difference_ms) }}
+                </span>
+            </div>
+
+            <div class="message">
+                {{ getFeedbackMessage(item) }}
+            </div>
+
+            <div class="timestamps">
+                <div class="user-time">
+                    <strong>You clicked:</strong> {{ item.user_clicked_time }}
+                </div>
+                <div class="expected-time" *ngIf="item.ground_truth">
+                    <strong>Expected:</strong> {{ item.ground_truth.live_clock_time }}
+                </div>
+            </div>
+
+            <div class="ai-feedback" *ngIf="item.ai_feedback">
+                💡 {{ item.ai_feedback }}
+            </div>
+        </div>
+
+        <div *ngIf="feedbackList.length === 0" class="empty-state">
+            Start training to see feedback here.
+        </div>
+    </div>
+</div>

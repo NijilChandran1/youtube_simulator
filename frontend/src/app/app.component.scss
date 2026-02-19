@@ -1,0 +1,191 @@
+.app-container {
+    display: flex;
+    height: 100vh;
+    padding: 20px;
+    gap: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); // Elegant purple gradient
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.video-section {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+}
+
+.player-wrapper {
+    position: relative;
+    background: black;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.overlay-position {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+/* Replaces .feedback-section */
+.side-panel {
+    flex: 1;
+    min-width: 300px;
+}
+
+.instructions-panel {
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+
+    h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+        color: #202124; // Google dark gray
+    }
+
+    ol {
+        padding-left: 20px;
+        margin-bottom: 10px;
+    }
+
+    li {
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+        color: #5f6368; // Google medium gray
+    }
+}
+
+.actions {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.start-btn,
+.end-btn,
+.feedback-toggle-btn {
+    background: #4285f4; // Google Blue
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: 5px;
+    width: 100%;
+    transition: background 0.2s;
+
+    &:hover:not(:disabled) {
+        background: #1a73e8; // Darker Google Blue
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
+
+    &:disabled {
+        background: #dadce0; // Google disabled gray
+        cursor: not-allowed;
+        color: #80868b;
+    }
+}
+
+.end-btn {
+    background: #ea4335; // Google Red
+
+    &:hover {
+        background: #d33b2c; // Darker Google Red
+    }
+}
+
+.feedback-toggle-btn {
+    background: #34a853; // Google Green
+    margin-top: 10px;
+
+    &:hover {
+        background: #2d9348; // Darker Google Green
+    }
+}
+
+.action-log {
+    margin-top: 15px;
+    background: white;
+    border-radius: 4px;
+    padding: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #dadce0; // Google border gray
+
+    .log-entry {
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+        color: #202124;
+        border-bottom: 1px solid #f1f3f4;
+        padding-bottom: 2px;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &.error {
+            color: #ea4335; // Google Red
+            font-weight: 500;
+        }
+
+        .time {
+            color: #5f6368;
+            font-size: 0.75rem;
+            margin-right: 5px;
+        }
+    }
+}
+
+/* Feedback Drawer */
+.feedback-drawer {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    /* Hidden */
+    width: 400px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+
+    &.open {
+        right: 0;
+    }
+
+    .drawer-header {
+        padding: 15px;
+        background: #f8f9fa;
+        border-bottom: 1px solid #dadce0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h3 {
+            margin: 0;
+            color: #202124;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #5f6368;
+            line-height: 1;
+
+            &:hover {
+                color: #202124;
+            }
+        }
+    }
+}

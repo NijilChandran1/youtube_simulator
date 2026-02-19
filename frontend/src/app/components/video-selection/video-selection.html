@@ -1,0 +1,41 @@
+<div class="selection-container">
+  <div class="selection-card">
+    <h1 class="title">✨ Agent Skillcraft - Simulator</h1>
+
+    <!-- Workflow Selection -->
+    <div class="workflow-section">
+      <label for="workflow-select" class="workflow-label">🎯 Training Workflow:</label>
+      <select id="workflow-select" class="workflow-dropdown" [(ngModel)]="selectedWorkflow"
+        (change)="onWorkflowChange($event)">
+        <option *ngFor="let workflow of workflows" [value]="workflow.id" [disabled]="!workflow.isActive">
+          {{ workflow.name }}{{ !workflow.isActive ? ' (Coming Soon)' : '' }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Video Selection -->
+    <div class="video-section">
+      <label for="video-select" class="video-label">🎬 Select Training Video:</label>
+
+      <div *ngIf="isLoading" class="loading">
+        Loading videos...
+      </div>
+
+      <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
+
+      <select *ngIf="!isLoading && !errorMessage" id="video-select" class="video-dropdown"
+        (change)="onVideoSelect($event)">
+        <option value="">-- Select a video --</option>
+        <option *ngFor="let video of videos" [value]="video.video_id">
+          {{ video.title }}
+        </option>
+      </select>
+    </div>
+
+    <div class="instructions">
+      <p>💡 Select a video to begin your training session.</p>
+    </div>
+  </div>
+</div>

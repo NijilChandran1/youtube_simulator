@@ -1,0 +1,110 @@
+.stats-container {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 12px;
+
+    .stats-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+
+        h4 {
+            margin: 0;
+            color: #202124;
+            font-size: 0.9rem;
+        }
+
+        .accuracy-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+
+            &.excellent {
+                background: #34a853;
+                color: white;
+            }
+
+            &.good {
+                background: #fbbc04;
+                color: #202124;
+            }
+
+            &.fair {
+                background: #ff9800;
+                color: white;
+            }
+
+            &.poor {
+                background: #ea4335;
+                color: white;
+            }
+        }
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-bottom: 10px;
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px;
+            border-radius: 6px;
+            transition: transform 0.2s;
+            cursor: help;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            }
+
+            &.perfect {
+                background: #e8f5e9;
+                border-left: 3px solid #34a853;
+            }
+
+            &.acceptable {
+                background: #fff9c4;
+                border-left: 3px solid #fbbc04;
+            }
+
+            &.miss {
+                background: #ffebee;
+                border-left: 3px solid #ea4335;
+            }
+
+            &.false-positive {
+                background: #f3e5f5;
+                border-left: 3px solid #9c27b0;
+            }
+
+            .count {
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: #202124;
+            }
+
+            .label {
+                font-size: 0.7rem;
+                color: #5f6368;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    .total-events {
+        text-align: center;
+        padding: 8px;
+        background: #f8f9fa;
+        border-radius: 6px;
+        color: #5f6368;
+        font-size: 0.8rem;
+    }
+}

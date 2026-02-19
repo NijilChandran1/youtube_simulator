@@ -1,0 +1,55 @@
+<div class="app-container">
+    <div class="video-section">
+        <div class="player-wrapper">
+            <app-video-player [src]="videoSrc"></app-video-player>
+            <div class="overlay-position">
+                <app-clock-overlay [startTimeISO]="startTimeISO"></app-clock-overlay>
+            </div>
+        </div>
+
+        <app-control-panel (eventLogged)="onEventLogged($event)" [isEnabled]="sessionId > 0"></app-control-panel>
+    </div>
+
+    <!-- Instructions & Status -->
+    <div class="side-panel">
+        <div class="instructions-panel">
+            <h3>📋 Instructions</h3>
+            <ol>
+                <li>Click <strong>Start New Session</strong> below to begin.</li>
+                <li>Watch for events (Logo, Copyright, etc.).</li>
+                <li><strong>Click</strong> the matching button (or use keys 1-5) <em>immediately</em> when you see the
+                    event.</li>
+            </ol>
+
+            <div class="actions">
+                <div class="session-controls">
+                    <button *ngIf="sessionId === 0" (click)="startSession()" [disabled]="isStarting" class="start-btn">
+                        {{ isStarting ? 'Starting...' : 'Start New Session' }}
+                    </button>
+                    <button *ngIf="sessionId > 0" (click)="endSession()" class="end-btn">
+                        End Session
+                    </button>
+                </div>
+
+                <button (click)="toggleFeedback()" class="feedback-toggle-btn">
+                    {{ isFeedbackOpen ? 'Hide Feedback Log' : 'Show Feedback Log' }}
+                </button>
+            </div>
+
+            <div class="action-log">
+                <div *ngFor="let log of actionLog" class="log-entry" [class.error]="log.isError">
+                    <span class="time">[{{ log.timestamp }}]</span> {{ log.message }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Drawer -->
+    <div class="feedback-drawer" [class.open]="isFeedbackOpen">
+        <div class="drawer-header">
+            <h3>Feedback Log</h3>
+            <button (click)="toggleFeedback()" class="close-btn">×</button>
+        </div>
+        <app-feedback-display [feedbackList]="feedbackList"></app-feedback-display>
+    </div>
+</div>
