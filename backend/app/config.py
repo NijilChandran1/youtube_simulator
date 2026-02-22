@@ -23,6 +23,16 @@ class Settings(BaseSettings):
     MAX_VIDEO_SIZE_MB: int = 500
     ALLOWED_VIDEO_FORMATS: List[str] = ["mp4", "webm", "mov"]
 
+    # Video asset serving
+    # Local dev: path relative to where uvicorn runs (backend/)
+    # Cloud Run: /usr/share/nginx/html/assets (will be empty — triggers GCS fallback)
+    ASSETS_PATH: str = "../frontend/public/assets"
+
+    # GCS fallback — used when local file is not found
+    # Split into bucket + blob prefix for use with the GCS SDK signed URL API
+    GCS_BUCKET: str = "alphabet_tsr"
+    GCS_BLOB_PREFIX: str = "videos/simulator"
+
     class Config:
         env_file = str(BASE_DIR / ".env")
         env_file_encoding = "utf-8"

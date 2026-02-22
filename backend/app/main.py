@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
-from app.routes import video_analysis, events, sessions, video_list
+from app.routes import video_analysis, events, sessions, video_list, video_serve
 
 app = FastAPI(
     title="EPG Training Feedback Loop API",
@@ -14,6 +14,7 @@ app.include_router(video_analysis.router)
 app.include_router(events.router)
 app.include_router(sessions.router)
 app.include_router(video_list.router)
+app.include_router(video_serve.router)
 
 # CORS Setup
 app.add_middleware(
