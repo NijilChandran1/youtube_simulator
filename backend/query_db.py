@@ -82,7 +82,7 @@ def query_sessions(conn):
 def query_ground_truth(conn):
     """Query and display all ground truth events"""
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM ground_truth_events where video_id='video' ORDER BY timestamp_seconds")
+    cursor.execute("SELECT * FROM ground_truth_events where video_id='super_bowl_2026' ORDER BY timestamp_seconds")
     rows = cursor.fetchall()
     
     if rows:
@@ -178,7 +178,7 @@ def main():
     try:
         # Query all tables
         #query_users(conn)
-        query_videos(conn)
+        #query_videos(conn)
         query_ground_truth(conn)
         #query_sessions(conn)
         #query_attempts(conn)

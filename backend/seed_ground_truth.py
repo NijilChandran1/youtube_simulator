@@ -27,10 +27,10 @@ def seed_ground_truth():
     # ==========================================
     
     # Current Configuration
-    target_video_id = "super_bowl_short"
-    target_title = "Super Bowl short"
-    target_filename = "superbowl-short.mp4"
-    target_duration = 192.0
+    target_video_id = "super_bowl_2026"
+    target_title = " Super Bowl 2026"
+    target_filename = "superbowl-2026.mp4"
+    target_duration = 320.0
     target_broadcast_start = "2026-02-08T15:30:00"
 
     try:
@@ -58,14 +58,8 @@ def seed_ground_truth():
         ).count()
         
         if existing_events > 0:
-            print(f"⚠️  {existing_events} ground truth events already exist for this video.")
-            # Auto-confirm deletion for smoother workflow
-            print("Auto-deleting existing events to update ground truth...")
-            db.query(GroundTruthEvent).filter(
-                GroundTruthEvent.video_id == target_video_id
-            ).delete()
-            db.commit()
-            print("✅ Deleted existing events")
+            print(f"✅ {existing_events} ground truth events already seeded — skipping.")
+            return
         
         # Sample ground truth events for the video
         # Adjusted for 192s duration
@@ -78,20 +72,20 @@ def seed_ground_truth():
             },
             {
                 "attribute": "Start of 3rd Quarter",
-                "timestamp_seconds": 96,
-                "live_clock_time": "15:31:36.000",
-                "clue_description": "Play resumed with the opening of the third quarter"
+                "timestamp_seconds": 102,
+                "live_clock_time": "15:31:42.000",
+                "clue_description": "Considering covergae from promo of the super bowl.Play resumed with the opening of the third quarter"
             },
             {
                 "attribute": "End of game",
-                "timestamp_seconds": 118,
-                "live_clock_time": "15:31:58.000",
+                "timestamp_seconds": 244,
+                "live_clock_time": "15:34:04.000",
                 "clue_description": "Appearance of final slate is considered as the official conclusion of the game."
             },
             {
                 "attribute": "Post gameshow",
-                "timestamp_seconds": 157,
-                "live_clock_time": "15:32:37.000",
+                "timestamp_seconds": 285,
+                "live_clock_time": "15:35:45.000",
                 "clue_description": "Broadcast transitioned to the post game show segment after the commercial interval. Considered start of postgame presentation."
             },
         ]

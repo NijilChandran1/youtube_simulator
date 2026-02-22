@@ -1,0 +1,35 @@
+# Git
+.git
+.gitignore
+
+# Node
+frontend/node_modules
+frontend/.angular
+
+# Python virtual environments and cache
+backend/venv
+backend/__pycache__
+backend/**/__pycache__
+backend/**/*.pyc
+backend/**/*.pyo
+
+# Local environment files (secrets — use Cloud Run env vars instead)
+backend/.env
+
+# Local data / uploads (not included in the image)
+backend/data/
+backend/uploads/
+
+# Test files
+backend/test_*.py
+backend/debug_*.py
+backend/check_*.py
+backend/query_db.py
+
+# Editor / OS
+.vscode
+.idea
+*.DS_Store
+
+# Docs
+*.md
